@@ -1,7 +1,7 @@
 // ignore: file_names
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:ready_artisans/Styles/AppColors.dart';
+import 'package:ready_artisans/Styles/app_colors.dart';
 import 'package:ready_artisans/Styles/Widgets/ClipPathShadow.dart';
 import 'customClipper.dart';
 

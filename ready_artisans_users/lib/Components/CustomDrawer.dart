@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:ready_artisans/Styles/AppColors.dart';
+import 'package:ready_artisans/Styles/app_colors.dart';
 
 import '../Models/Users/Users.dart';
-import '../Pages/NewArtisan/NewArtisanPage.dart';
+import '../Pages/NewArtisan/new_artisan_page.dart';
 import '../Providers/UserProvider.dart';
 import '../generated/assets.dart';
 

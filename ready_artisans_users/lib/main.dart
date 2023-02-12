@@ -6,14 +6,14 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:ready_artisans/Database/LocalDatabase.dart';
-import 'package:ready_artisans/Pages/Home/HomePage.dart';
-import 'package:ready_artisans/Styles/AppColors.dart';
-import 'Database/FirebaseApi.dart';
+import 'package:ready_artisans/Pages/Home/home_page.dart';
+import 'package:ready_artisans/Styles/app_colors.dart';
+import 'Database/firebase_api.dart';
 import 'Models/Users/Users.dart';
-import 'Pages/Welcome/WelcomePage.dart';
-import 'Providers/LocationProvider.dart';
+import 'Pages/Welcome/welcome_page.dart';
 import 'Providers/NavigationProvider.dart';
 import 'Providers/UserProvider.dart';
+import 'Providers/location_provider.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -45,32 +45,33 @@ class _MyAppState extends State<MyApp> {
       Provider.of<LocationService>(context, listen: false).getCurrentPosition();
     });
   }
-  getUser(){
+
+  getUser() {
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          Provider.of<LocationService>(context, listen: false).getCurrentPosition();
+          Provider.of<LocationService>(context, listen: false)
+              .getCurrentPosition();
         });
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasData) {
           User? user = snapshot.data;
           return StreamBuilder<DocumentSnapshot>(
-            stream: FirebaseApi.getUserStream(user!.uid),
-            builder: (context, snapshot) {
-              if(snapshot.hasData&&snapshot.data!.exists) {
-                Users users = Users.fromJson(snapshot.data!.data()as Map<String, dynamic>);
-               // HiveApi().setUser(users);
-                WidgetsBinding.instance.addPostFrameCallback((_) {
+              stream: FirebaseApi.getUserStream(user!.uid),
+              builder: (context, snapshot) {
+                if (snapshot.hasData && snapshot.data!.exists) {
+                  Users users = Users.fromJson(
+                      snapshot.data!.data() as Map<String, dynamic>);
+                  // HiveApi().setUser(users);
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
                     Provider.of<UserProvider>(context, listen: false)
                         .setUser(users);
-                });
-
-              }
-              return const HomePage();
-            }
-          );
+                  });
+                }
+                return const HomePage();
+              });
         } else if (snapshot.hasError) {
           return const Center(child: Text('Something went wrong'));
         } else {
@@ -79,6 +80,7 @@ class _MyAppState extends State<MyApp> {
       },
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -102,11 +104,10 @@ class _MyAppState extends State<MyApp> {
       ),
       builder: FlutterSmartDialog.init(),
       home: FutureBuilder<bool>(
-        future: null,
-        builder: (context, snapshot) {
-          return getUser();
-        }
-      ),
+          future: null,
+          builder: (context, snapshot) {
+            return getUser();
+          }),
     );
   }
 }

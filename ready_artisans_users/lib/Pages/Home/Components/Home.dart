@@ -1,13 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:ready_artisans/Components/TextInputs.dart';
-import 'package:ready_artisans/Providers/LocationProvider.dart';
-import '../../../Components/CustomDropDown.dart';
+import '../../../Components/custom_dropdown.dart';
+import '../../../Components/text_inputs.dart';
 import '../../../Models/Category.dart';
-import '../../../Styles/AppColors.dart';
+import '../../../Providers/location_provider.dart';
+import '../../../Styles/app_colors.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -30,7 +29,6 @@ class _HomeState extends State<Home> {
   String? filterValue; // this is the value of the selected filter
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       var provider = Provider.of<LocationService>(context, listen: false);
@@ -41,10 +39,6 @@ class _HomeState extends State<Home> {
       }
     });
   }
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -123,15 +117,15 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.all(8.0),
                 child: CarouselSlider(
                   options: CarouselOptions(
-                      height: 130,
-                      autoPlay: true,
-                      autoPlayInterval: const Duration(seconds: 10),
-                      autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enlargeCenterPage: false,
-                      scrollDirection: Axis.horizontal,
+                    height: 130,
+                    autoPlay: true,
+                    autoPlayInterval: const Duration(seconds: 10),
+                    autoPlayAnimationDuration:
+                        const Duration(milliseconds: 800),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enlargeCenterPage: false,
+                    scrollDirection: Axis.horizontal,
                     viewportFraction: 0.4,
-
                   ),
                   items: Categories.dummyData.map((i) {
                     return Builder(
@@ -192,7 +186,6 @@ class _HomeState extends State<Home> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
             ],
           ),
         ),
