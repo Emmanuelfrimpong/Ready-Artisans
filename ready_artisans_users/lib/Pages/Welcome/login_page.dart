@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:ready_artisans/Database/LocalDatabase.dart';
+import 'package:ready_artisans/Database/local_database.dart';
 import 'package:ready_artisans/Providers/NavigationProvider.dart';
 import 'package:ready_artisans/Providers/UserProvider.dart';
 import 'package:ready_artisans/Styles/app_colors.dart';

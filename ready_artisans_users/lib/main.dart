@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:ready_artisans/Database/LocalDatabase.dart';
+import 'package:ready_artisans/Database/local_database.dart';
 import 'package:ready_artisans/Pages/Home/home_page.dart';
 import 'package:ready_artisans/Styles/app_colors.dart';
 import 'Database/firebase_api.dart';
