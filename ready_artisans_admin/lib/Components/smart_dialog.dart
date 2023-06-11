@@ -1,14 +1,32 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../app_colors.dart';
-import 'custom_button.dart';
+import '../Constants/enums.dart';
+import '../utils/app_colors.dart';
+
 
 class CustomDialog {
   static void showLoading({required String message}) {
     SmartDialog.showLoading(
       msg: message,
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(10)),
+        child: Row(mainAxisSize: MainAxisSize.min, children: [
+          const CircularProgressIndicator(
+            color: primaryColor,
+          ),
+          const SizedBox(width: 10),
+          Text(
+            message,
+            style: GoogleFonts.nunito(
+                color: primaryColor, fontSize: 13, fontWeight: FontWeight.bold),
+          ),
+        ]),
+      ),
     );
   }
 
@@ -16,23 +34,66 @@ class CustomDialog {
     SmartDialog.dismiss();
   }
 
-  static void showToast({required String message}) {
+  static void showToast({
+    required String message,
+    ToastType type = ToastType.success,
+  }) {
     SmartDialog.showToast(
       message,
+      alignment:
+          AlignmentGeometry.lerp(Alignment.center, Alignment.bottomCenter, 0.5),
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(10)),
+        child: Row(mainAxisSize: MainAxisSize.min, children: [
+          Icon(
+            type == ToastType.success
+                ? Icons.check_circle
+                : type == ToastType.error
+                    ? Icons.error
+                    : type == ToastType.warning
+                        ? Icons.warning
+                        : Icons.info,
+            color: type == ToastType.success
+                ? Colors.green
+                : type == ToastType.error
+                    ? Colors.red
+                    : type == ToastType.warning
+                        ? Colors.yellow
+                        : Colors.blue,
+          ),
+          const SizedBox(width: 10),
+          Text(
+            message,
+            style: GoogleFonts.nunito(
+              fontSize: 13,
+              fontWeight: FontWeight.bold,
+              color: type == ToastType.success
+                  ? Colors.green
+                  : type == ToastType.error
+                      ? Colors.red
+                      : type == ToastType.warning
+                          ? Colors.yellow
+                          : Colors.blue,
+            ),
+          ),
+        ]),
+      ),
     );
   }
 
-  static void showError({required String message}) {
+  static void showError({required String title, String? message}) {
     SmartDialog.show(
       maskColor: Colors.transparent,
       builder: (_) {
         return Container(
-          width: 450,
-          height: 250,
-          padding: const EdgeInsets.all(5),
+          width: 300,
+          height: 150,
+          padding: const EdgeInsets.only(top: 10),
           decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
+              color: Colors.white.withOpacity(.9),
+              borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
@@ -47,36 +108,53 @@ class CustomDialog {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Transform.translate(
-                  offset: const Offset(0, -40),
-                  child: const CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Colors.red,
-                    child: Icon(
-                      Icons.error,
-                      size: 50,
-                      color: Colors.white,
-                    ),
+                Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
+                ),
+                if (message != null)
+                  Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    style:
+                        GoogleFonts.roboto(color: Colors.black, fontSize: 13),
+                  ),
+                const Spacer(),
+                Container(
+                  height: 30,
+                  decoration: const BoxDecoration(
+                    border: Border(
+                        top: BorderSide(color: Colors.black26, width: 1.5)),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                          child: TextButton(
+                        onPressed: () => SmartDialog.dismiss(),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.all(10)),
+                        ),
+                        child: Text(
+                          'Okay',
+                          style: GoogleFonts.nunito(
+                              color: Colors.red,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ))
+                    ],
                   ),
                 ),
-                Text(
-                  message,
-                  textAlign: TextAlign.center,
-                  maxLines: 4,
-                  style: GoogleFonts.nunito(color: Colors.black, fontSize: 15),
-                ),
-                const Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CustomButton(
-                      text: 'Okay',
-                      onPressed: () => SmartDialog.dismiss(),
-                      color: primaryColor,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 5),
               ],
             ),
           ),
@@ -85,17 +163,17 @@ class CustomDialog {
     );
   }
 
-  static void showSuccess({required String message}) {
+  static void showSuccess({required String title, String? message}) {
     SmartDialog.show(
       maskColor: Colors.transparent,
       builder: (_) {
         return Container(
-          width: 450,
-          height: 250,
-          padding: const EdgeInsets.all(5),
+          width: 300,
+          height: 150,
+          padding: const EdgeInsets.only(top: 10),
           decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
+              color: Colors.white.withOpacity(.9),
+              borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
@@ -109,38 +187,56 @@ class CustomDialog {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Transform.translate(
-                  offset: const Offset(0, -40),
-                  child: const CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Colors.green,
-                    child: Icon(
-                      Icons.check,
-                      size: 50,
-                      color: Colors.white,
-                    ),
+                Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  maxLines: 4,
+                  style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
+                ),
+                if (message != null)
+                  Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    maxLines: 3,
+                    style:
+                        GoogleFonts.roboto(color: Colors.black, fontSize: 13),
+                  ),
+                const Spacer(),
+                Container(
+                  height: 30,
+                  decoration: const BoxDecoration(
+                    border: Border(
+                        top: BorderSide(color: Colors.black26, width: 1.5)),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                          child: TextButton(
+                        onPressed: () => SmartDialog.dismiss(),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.all(10)),
+                        ),
+                        child: Text(
+                          'Okay',
+                          style: GoogleFonts.nunito(
+                              color: Colors.green,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ))
+                    ],
                   ),
                 ),
-                Text(
-                  message,
-                  maxLines: 4,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.nunito(color: Colors.black, fontSize: 15),
-                ),
-                const Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CustomButton(
-                      text: 'Okay',
-                      onPressed: () => SmartDialog.dismiss(),
-                      color: primaryColor,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 5),
               ],
             ),
           ),
@@ -150,21 +246,22 @@ class CustomDialog {
   }
 
   static Future<void> showInfo(
-      {required String message,
-      VoidCallback? onPressed,
-      required String buttonText,
+      {required String title,
+      String? message,
+      VoidCallback? onConfirm,
+      required String onConfirmText,
       String? buttonText2,
       VoidCallback? onPressed2}) async {
     SmartDialog.show(
       maskColor: Colors.transparent,
       builder: (_) {
         return Container(
-          width: 400,
-          height: 230,
-          padding: const EdgeInsets.all(5),
+          width: 300,
+          height: 150,
+          padding: const EdgeInsets.only(top: 10),
           decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
+              color: Colors.white.withOpacity(.9),
+              borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
@@ -177,53 +274,80 @@ class CustomDialog {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Transform.translate(
-                offset: const Offset(0, -40),
-                child: const CircleAvatar(
-                  radius: 50,
-                  backgroundColor: Colors.blue,
-                  child: Icon(
-                    Icons.info,
-                    size: 50,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              Transform.translate(
-                offset: const Offset(0, -30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: Text(
-                  message,
-                  maxLines: 3,
+                  title,
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.nunito(color: Colors.black, fontSize: 15),
+                  maxLines: 2,
+                  style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
+              if (message != null)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    maxLines: 4,
+                    style:
+                        GoogleFonts.roboto(color: Colors.black, fontSize: 13),
+                  ),
+                ),
               const Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomButton(
-                    text: buttonText,
-                    onPressed: onPressed!,
-                    color: secondaryColor,
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  CustomButton(
-                    text: buttonText2 ?? 'Cancel',
-                    onPressed: () {
-                      if (onPressed2 != null) {
-                        onPressed2.call();
-                      } else {
-                        SmartDialog.dismiss();
-                      }
-                    },
-                    color: primaryColor,
-                  ),
-                ],
+              Container(
+                height: 30,
+                decoration: const BoxDecoration(
+                  border: Border(
+                      top: BorderSide(color: Colors.black26, width: 1.5)),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        child: TextButton(
+                      onPressed: onConfirm,
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.transparent),
+                        padding:
+                            MaterialStateProperty.all(const EdgeInsets.all(10)),
+                      ),
+                      child: Text(
+                        onConfirmText,
+                        style: GoogleFonts.nunito(
+                            color: Colors.green,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    )),
+                    const VerticalDivider(
+                      color: Colors.black26,
+                      thickness: 1.5,
+                    ),
+                    Expanded(
+                        child: TextButton(
+                      onPressed: () => SmartDialog.dismiss(),
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.transparent),
+                        padding:
+                            MaterialStateProperty.all(const EdgeInsets.all(10)),
+                      ),
+                      child: Text(
+                        buttonText2 ?? 'Cancel',
+                        style: GoogleFonts.nunito(
+                            color: Colors.red,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ))
+                  ],
+                ),
               ),
-              const SizedBox(height: 5),
             ],
           ),
         );

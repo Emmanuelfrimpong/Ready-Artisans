@@ -1,5 +1,4 @@
-// ignore_for_file: file_names
-import 'package:flutter/foundation.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,8 +7,8 @@ import 'package:ready_artisans/Pages/Welcome/forgot_password.dart';
 import 'package:ready_artisans/Pages/Welcome/login_page.dart';
 import 'package:ready_artisans/Pages/Welcome/sign_up_page.dart';
 import 'package:ready_artisans/Styles/app_colors.dart';
-import '../../Providers/NavigationProvider.dart';
-import '../../Styles/Widgets/bezierContainer.dart';
+import '../../Providers/navigation_provider.dart';
+import '../../Styles/Widgets/bezier_container.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -58,28 +57,28 @@ class _WelcomePageState extends State<WelcomePage> {
             ));
   }
 
-  EdgeInsets _viewInsets = EdgeInsets.zero;
-  SingletonFlutterWindow? window;
+  final EdgeInsets _viewInsets = EdgeInsets.zero;
+  FlutterView? window;
   @override
   void initState() {
     super.initState();
-    window = WidgetsBinding.instance.window;
-    window?.onMetricsChanged = () {
-      if (mounted) {
-        setState(() {
-          final window = this.window;
-          if (window != null) {
-            _viewInsets = EdgeInsets.fromWindowPadding(
-              window.viewInsets,
-              window.devicePixelRatio,
-            ).add(EdgeInsets.fromWindowPadding(
-              window.padding,
-              window.devicePixelRatio,
-            )) as EdgeInsets;
-          }
-        });
-      }
-    };
+    // window = View.of(context);
+    // window?.onMetricsChanged = () {
+    //   if (mounted) {
+    //     setState(() {
+    //       final window = this.window;
+    //       if (window != null) {
+    //         _viewInsets = EdgeInsets.fromWindowPadding(
+    //           window.viewInsets,
+    //           window.devicePixelRatio,
+    //         ).add(EdgeInsets.fromWindowPadding(
+    //           window.padding,
+    //           window.devicePixelRatio,
+    //         )) as EdgeInsets;
+    //       }
+    //     });
+    //   }
+    // };
   }
 
   @override

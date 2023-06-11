@@ -9,11 +9,11 @@ import 'package:ready_artisans/Database/local_database.dart';
 import 'package:ready_artisans/Pages/Home/home_page.dart';
 import 'package:ready_artisans/Styles/app_colors.dart';
 import 'Database/firebase_api.dart';
-import 'Models/Users/Users.dart';
+import 'Models/Users/users.dart';
 import 'Pages/Welcome/welcome_page.dart';
-import 'Providers/NavigationProvider.dart';
-import 'Providers/UserProvider.dart';
+import 'Providers/navigation_provider.dart';
 import 'Providers/location_provider.dart';
+import 'Providers/user_provider.dart';
 import 'firebase_options.dart';
 
 void main() async {

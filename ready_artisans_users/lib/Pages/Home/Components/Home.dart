@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../../Components/custom_dropdown.dart';
 import '../../../Components/text_inputs.dart';
-import '../../../Models/Category.dart';
+import '../../../Models/category.dart';
 import '../../../Providers/location_provider.dart';
 import '../../../Styles/app_colors.dart';
 

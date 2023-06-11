@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
 
-import '../app_colors.dart';
+import '../utils/app_colors.dart';
 
 class CustomTable extends StatefulWidget {
   CustomTable({
@@ -408,7 +408,7 @@ class CustomTableState extends State<CustomTable> {
                               sortAscending: widget.sortAscending,
                               onSelectAll: widget.onSelectAll,
                               decoration: const BoxDecoration(),
-                              dataRowHeight: widget.dataRowHeight,
+                              dataRowMinHeight: widget.dataRowHeight,
                               headingRowHeight: widget.headingRowHeight,
                               horizontalMargin: widget.horizontalMargin,
                               checkboxHorizontalMargin:

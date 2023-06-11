@@ -1,15 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:ready_artisans_admin/Database/hive_api.dart';
 import 'package:url_strategy/url_strategy.dart';
-
 import 'Configs/routers.gr.dart';
-import 'State_Management/state_management.dart';
-import 'app_colors.dart';
+import 'utils/app_colors.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -19,12 +17,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await HiveApi.init();
-
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (context) => StateManagement(),
-    ),
-  ], child: MyApp()));
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

@@ -1,23 +1,20 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ready_artisans_admin/Pages/Home/Components/side_bar.dart';
 import 'package:ready_artisans_admin/State_Management/state_management.dart';
+import '../../utils/app_colors.dart';
 
-import '../../app_colors.dart';
-
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<StateManagement>(builder: (context, navigation, child) {
       return LayoutBuilder(builder: (context, constraints) {
         return Scaffold(
           appBar: constraints.maxWidth < 800
@@ -41,14 +38,24 @@ class _HomePageState extends State<HomePage> {
                     isSelected: false,
                     onPressed: () {
                       if (constraints.maxWidth > 800) {
-                        navigation.toggleSideBar();
-                      } else {
-                        navigation.toggleSideBar();
-                        if (navigation
-                            .getScaffoldKey.currentState!.isDrawerOpen) {
-                          navigation.getScaffoldKey.currentState!.closeDrawer();
+                        var current= ref.watch(sidebarWithProvider);
+                        if (current == 60) {
+                          ref.read(sidebarWithProvider.notifier).state = 200;
                         } else {
-                          navigation.getScaffoldKey.currentState!.openDrawer();
+                          ref.read(sidebarWithProvider.notifier).state = 60;
+                        }
+                      } else {
+                        var current= ref.watch(sidebarWithProvider);
+                        if (current == 60) {
+                          ref.read(sidebarWithProvider.notifier).state = 200;
+                        } else {
+                          ref.read(sidebarWithProvider.notifier).state = 60;
+                        }
+                        var scaffoldKey = ref.watch(scaffoldKeyProvider);
+                        if (scaffoldKey.currentState!.isDrawerOpen) {
+                          scaffoldKey.currentState!.closeDrawer();
+                        } else {
+                          scaffoldKey.currentState!.openDrawer();
                         }
                       }
                     },
@@ -57,21 +64,21 @@ class _HomePageState extends State<HomePage> {
                 )
               : null,
           body: Scaffold(
-            key: navigation.getScaffoldKey,
+            key: ref.watch(scaffoldKeyProvider),
             drawer: constraints.maxWidth <= 800 ? const SideBard() : null,
             body: constraints.maxWidth > 800
                 ? Row(children: [
                     const SideBard(),
                     Expanded(
                         child: AutoRouter(
-                      key: navigation.getRouterKey,
+                      //key: ref.watch(routerKeyProvider),
                       builder: (context, content) {
                         return content;
                       },
                     ))
                   ])
                 : AutoRouter(
-                    key: navigation.getRouterKey,
+                    //key:ref.watch(routerKeyProvider),
                     builder: (context, content) {
                       return content;
                     },
@@ -79,6 +86,6 @@ class _HomePageState extends State<HomePage> {
           ),
         );
       });
-    });
+
   }
 }

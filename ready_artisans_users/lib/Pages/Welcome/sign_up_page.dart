@@ -7,12 +7,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:ready_artisans/Database/firebase_api.dart';
-import 'package:ready_artisans/Providers/NavigationProvider.dart';
+import 'package:ready_artisans/Providers/navigation_provider.dart';
 import '../../Components/custom_dropdown.dart';
 import '../../Components/smart_dialog.dart';
 import '../../Components/text_inputs.dart';
 import '../../Constants/strings.dart';
-import '../../Models/Users/Users.dart';
+import '../../Models/Users/users.dart';
 import '../../Styles/app_colors.dart';
 import '../../generated/assets.dart';
 

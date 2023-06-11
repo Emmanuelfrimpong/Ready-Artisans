@@ -1,15 +1,11 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ready_artisans_admin/Components/custom_button.dart';
-import 'package:ready_artisans_admin/Components/smart_dialog.dart';
 import 'package:ready_artisans_admin/Configs/routers.gr.dart';
-import 'package:ready_artisans_admin/Database/firebase_api.dart';
-import '../../Components/text_inputs.dart';
+import '../../Components/custom_input.dart';
 import '../../Constants/strings.dart';
-import '../../app_colors.dart';
+import '../../utils/app_colors.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../Components/dashboard_card.dart';
@@ -48,11 +47,11 @@ class _DashboardPageState extends State<DashboardPage> {
             ]),
           ),
           const SizedBox(height: 20),
-          Wrap(
+          const Wrap(
             spacing: 15,
             runAlignment: WrapAlignment.center,
             runSpacing: 15,
-            children: const [
+            children: [
               DashboardCard(
                 color: Colors.blue,
                 title: 'Total Users',

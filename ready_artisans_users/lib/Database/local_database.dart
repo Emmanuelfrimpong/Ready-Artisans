@@ -1,8 +1,7 @@
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:ready_artisans/Models/Users/Users.dart';
+import 'package:ready_artisans/Models/Users/users.dart';
 
-class HiveApi{
+class HiveApi {
   static final HiveApi _instance = HiveApi._internal();
   factory HiveApi() => _instance;
   HiveApi._internal();
@@ -15,16 +14,14 @@ class HiveApi{
   }
 
   // Path: lib\Database\LocalDatabase.dart
-   setUser(Users users)  {
+  setUser(Users users) {
     final box = Hive.box<Users>('users');
     box.put('user', users);
   }
 
   // Path: lib\Database\LocalDatabase.dart
-   Users? getUser()  {
+  Users? getUser() {
     final box = Hive.box<Users>('users');
-    return box.get('user',defaultValue: Users());
+    return box.get('user', defaultValue: Users());
   }
-
-
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart' as geo;
 import 'package:location/location.dart' as loc;
 import '../Components/smart_dialog.dart';
-import '../GlobalFunctions.dart';
+import '../global_functions.dart';
 
 class LocationService extends ChangeNotifier {
   UserLocation? _currentLocation;

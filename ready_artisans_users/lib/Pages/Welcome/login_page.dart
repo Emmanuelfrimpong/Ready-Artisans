@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:ready_artisans/Database/local_database.dart';
-import 'package:ready_artisans/Providers/NavigationProvider.dart';
-import 'package:ready_artisans/Providers/UserProvider.dart';
+import 'package:ready_artisans/Providers/navigation_provider.dart';
 import 'package:ready_artisans/Styles/app_colors.dart';
 
 import '../../Components/smart_dialog.dart';
 import '../../Components/text_inputs.dart';
 import '../../Constants/strings.dart';
 import '../../Database/firebase_api.dart';
-import '../../Models/Users/Users.dart';
+import '../../Models/Users/users.dart';
+import '../../Providers/user_provider.dart';
 import '../../generated/assets.dart';
 import '../Home/home_page.dart';
 
