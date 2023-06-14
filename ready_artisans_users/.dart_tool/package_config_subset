@@ -486,10 +486,6 @@ yaml
 2.19
 file:///C:/Users/fusek/AppData/Local/Pub/Cache/hosted/pub.dev/yaml-3.1.2/
 file:///C:/Users/fusek/AppData/Local/Pub/Cache/hosted/pub.dev/yaml-3.1.2/lib/
-ready_artisans
-2.18
-file:///C:/Users/fusek/Documents/GitHub/Ready%20Artisans/ready_artisans_users/
-file:///C:/Users/fusek/Documents/GitHub/Ready%20Artisans/ready_artisans_users/lib/
 sky_engine
 3.0
 file:///C:/Users/fusek/flutter/bin/cache/pkg/sky_engine/
@@ -506,4 +502,8 @@ flutter_web_plugins
 3.0
 file:///C:/Users/fusek/flutter/packages/flutter_web_plugins/
 file:///C:/Users/fusek/flutter/packages/flutter_web_plugins/lib/
+ready_artisans
+2.18
+file:///D:/PROJECTS/Ready-Artisans/ready_artisans_users/
+file:///D:/PROJECTS/Ready-Artisans/ready_artisans_users/lib/
 2

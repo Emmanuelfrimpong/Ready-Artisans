@@ -16,7 +16,6 @@ class _SideBardState extends ConsumerState<SideBard> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var routerKey = ref.watch(routerKeyProvider);
     return LayoutBuilder(builder: (context, constraints) {
       return Container(
           width: ref.watch(sidebarWithProvider),
@@ -53,57 +52,45 @@ class _SideBardState extends ConsumerState<SideBard> {
                 ),
                 SideBarItem(
                     onTap: () {
-                      ref
-                          .read(homePageChangeNotifierProvider.notifier)
-                          .changePage(const DashboardRoute(), Pages.Dashboard,
-                              routerKey);
+                      ref.read(homePageItemProvider.notifier).state =
+                          Pages.Dashboard;
                     },
-                    isSelected: ref.watch(homePageChangeNotifierProvider) ==
-                        Pages.Dashboard,
+                    isSelected:
+                        ref.watch(homePageItemProvider) == Pages.Dashboard,
                     title: 'Dashboard',
                     icon: Icons.apps),
                 SideBarItem(
                     onTap: () {
-                      ref
-                          .read(homePageChangeNotifierProvider.notifier)
-                          .changePage(
-                              const UsersRoute(), Pages.Users, routerKey);
+                      ref.read(homePageItemProvider.notifier).state =
+                          Pages.Users;
                     },
-                    isSelected: ref.watch(homePageChangeNotifierProvider) ==
-                        Pages.Users,
+                    isSelected: ref.watch(homePageItemProvider) == Pages.Users,
                     title: 'Users',
                     icon: Icons.people),
                 SideBarItem(
                     onTap: () {
-                      ref
-                          .read(homePageChangeNotifierProvider.notifier)
-                          .changePage(
-                              const ArtisansRoute(), Pages.Artisans, routerKey);
+                      ref.read(homePageItemProvider.notifier).state =
+                          Pages.Artisans;
                     },
-                    isSelected: ref.watch(homePageChangeNotifierProvider) ==
-                        Pages.Artisans,
+                    isSelected:
+                        ref.watch(homePageItemProvider) == Pages.Artisans,
                     title: 'Artisans',
                     icon: Icons.work_history),
                 SideBarItem(
                     onTap: () {
-                      ref
-                          .read(homePageChangeNotifierProvider.notifier)
-                          .changePage(
-                              const OrdersRoute(), Pages.Orders, routerKey);
+                      ref.read(homePageItemProvider.notifier).state =
+                          Pages.Orders;
                     },
-                    isSelected: ref.watch(homePageChangeNotifierProvider) ==
-                        Pages.Orders,
+                    isSelected: ref.watch(homePageItemProvider) == Pages.Orders,
                     title: 'Request',
                     icon: FontAwesomeIcons.cartShopping),
                 SideBarItem(
                     onTap: () {
-                      ref
-                          .read(homePageChangeNotifierProvider.notifier)
-                          .changePage(
-                              const SettingsRoute(), Pages.Settings, routerKey);
+                      ref.read(homePageItemProvider.notifier).state =
+                          Pages.Settings;
                     },
-                    isSelected: ref.watch(homePageChangeNotifierProvider) ==
-                        Pages.Settings,
+                    isSelected:
+                        ref.watch(homePageItemProvider) == Pages.Settings,
                     title: 'Settings',
                     icon: FontAwesomeIcons.gears),
                 const Divider(
@@ -148,50 +135,47 @@ class _SideBarItemState extends ConsumerState<SideBarItem> {
   @override
   Widget build(BuildContext context) {
     var nav = ref.watch(sidebarWithProvider);
-      return InkWell(
-        onTap: widget.onTap,
-        onHover: (value) {
-          setState(() {
-            onHover = value;
-          });
-        },
-        child: Container(
-            height: 65,
-            width: nav,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            color: widget.title.isNotEmpty
-                ? widget.isSelected
-                    ? background
-                    : onHover
-                        ? Colors.black.withOpacity(0.3)
-                        : Colors.transparent
-                : Colors.transparent,
-            child: Row(
-              mainAxisAlignment: nav == 60
-                  ? MainAxisAlignment.center
-                  : MainAxisAlignment.start,
-              children: [
-                if (widget.title.isEmpty && nav == 200)
-                  const Spacer(),
-                Icon(
-                  widget.icon,
-                  color: widget.isSelected ? primaryColor : background,
+    return InkWell(
+      onTap: widget.onTap,
+      onHover: (value) {
+        setState(() {
+          onHover = value;
+        });
+      },
+      child: Container(
+          height: 65,
+          width: nav,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          color: widget.title.isNotEmpty
+              ? widget.isSelected
+                  ? background
+                  : onHover
+                      ? Colors.black.withOpacity(0.3)
+                      : Colors.transparent
+              : Colors.transparent,
+          child: Row(
+            mainAxisAlignment:
+                nav == 60 ? MainAxisAlignment.center : MainAxisAlignment.start,
+            children: [
+              if (widget.title.isEmpty && nav == 200) const Spacer(),
+              Icon(
+                widget.icon,
+                color: widget.isSelected ? primaryColor : background,
+              ),
+              if (nav > 60)
+                const SizedBox(
+                  width: 20,
                 ),
-                if (nav > 60)
-                  const SizedBox(
-                    width: 20,
-                  ),
-                if (nav > 60)
-                  Text(
-                    widget.title,
-                    style: GoogleFonts.nunito(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: widget.isSelected ? primaryColor : background),
-                  )
-              ],
-            )),
-      );
-
+              if (nav > 60)
+                Text(
+                  widget.title,
+                  style: GoogleFonts.nunito(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: widget.isSelected ? primaryColor : background),
+                )
+            ],
+          )),
+    );
   }
 }
